@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game Dev by rachitiitr</title>
+</head>
+<body>
+    <div style="display:flex; width:100%">
+        <canvas id="mycanvas" width="800" height="600" style="margin:0 auto" />
+    </div>
+    <script>
+        let canvas = document.querySelector('#mycanvas');
+        let canvasContext = canvas.getContext('2d');
+
+        let centerX = Math.random() * 800;
+        let centerY = Math.random() * 600;
+        let rad = 1;
+        let POINTS = [];
+
+        function colorRect(topLeftX,topLeftY, boxWidth,boxHeight, fillColor) {
+            canvasContext.beginPath();
+
+            canvasContext.fillStyle = fillColor;
+            canvasContext.fillRect(topLeftX,topLeftY, boxWidth,boxHeight);
+
+            canvasContext.closePath();
+        }
+        
+        function colorCircle(centerX,centerY, radius, fillColor) {
+            canvasContext.beginPath();
+
+            canvasContext.fillStyle = fillColor;
+            canvasContext.arc(centerX,centerY, radius, 0,Math.PI*2, true);
+            canvasContext.fill();
+
+            canvasContext.closePath();
+        }
+
+        function draw() {
+            let W = canvas.width;
+            let H = canvas.height;
+            let h = H - 50;
+
+            POINTS[0] = [W/2, 25];
+            POINTS[1] = [W/2 - h/2, 25+h];
+            POINTS[2] = [W/2 + h/2, 25+h];
+
+            colorCircle(POINTS[0][0],POINTS[0][1], rad, 'cyan');
+            colorCircle(POINTS[1][0],POINTS[1][1], rad, 'cyan');
+            colorCircle(POINTS[2][0],POINTS[2][1], rad, 'cyan');
+            colorCircle(centerX, centerY, rad, 'cyan');
+
+            let target = Math.floor(Math.random() * 3);
+
+            centerX = (POINTS[target][0] + centerX)/2;
+            centerY = (POINTS[target][1] + centerY)/2;
+
+            requestAnimationFrame(draw);
+        }
+
+        window.onload = function() {
+            colorRect(0,0, canvas.width,canvas.height, 'black'); 
+            draw();
+        }
+
+    </script>
+</body>
+</html>
