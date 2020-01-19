@@ -6,18 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Game Dev by rachitiitr</title>
 </head>
-<body>
-    <div style="display:flex; width:100%">
-        <canvas id="mycanvas" width="800" height="600" style="margin:0 auto" />
+<body >
+    <div>
+        <canvas id="mycanvas" width="800" height="600" style="display:block;margin:0 auto"></canvas>
+        <br/>
+        Enter # of sides: <input id="nthsidedpolygon" type="number" placeholder="sides must be greater than 3" style="width:200px"/>
+        <br/>
+        <div style="border: 1px solid #CCC; display: inline-block; background:#DDD;" onclick="playForSide()">Amaze me!</div>
     </div>
     <script>
         let canvas = document.querySelector('#mycanvas');
         let canvasContext = canvas.getContext('2d');
 
-        let centerX = Math.random() * 800;
-        let centerY = Math.random() * 600;
-        let rad = 1;
+        let centerX = Math.random() * canvas.width;
+        let centerY = Math.random() * canvas.height;
+        let RAD = 1;
         let POINTS = [];
+        let N = 3;
+        let PADDING = 50;
+        
+        function playForSide() {
+            N = document.querySelector('#nthsidedpolygon').value;
+            init();
+        }
 
         function colorRect(topLeftX,topLeftY, boxWidth,boxHeight, fillColor) {
             canvasContext.beginPath();
@@ -41,28 +52,33 @@
         function draw() {
             let W = canvas.width;
             let H = canvas.height;
-            let h = H - 50;
+            let h = H - PADDING;
+            let origin = [W/2, h/2+PADDING/2];
+            let rad = h/2;
+            let theta = (Math.PI*2)/N; 
 
-            POINTS[0] = [W/2, 25];
-            POINTS[1] = [W/2 - h/2, 25+h];
-            POINTS[2] = [W/2 + h/2, 25+h];
+            for (let i=0; i<N; i++) {
+                let currentTheta = i*theta;
+                POINTS[i] = [origin[0] + rad*Math.cos(currentTheta), origin[1]+rad*Math.sin(currentTheta)];
+                colorCircle(POINTS[i][0],POINTS[i][1], RAD*10, 'cyan');
+            }
+            
+            colorCircle(centerX, centerY, RAD, 'cyan');
 
-            colorCircle(POINTS[0][0],POINTS[0][1], rad, 'cyan');
-            colorCircle(POINTS[1][0],POINTS[1][1], rad, 'cyan');
-            colorCircle(POINTS[2][0],POINTS[2][1], rad, 'cyan');
-            colorCircle(centerX, centerY, rad, 'cyan');
-
-            let target = Math.floor(Math.random() * 3);
-
+            let target = Math.floor(Math.random() * N);
             centerX = (POINTS[target][0] + centerX)/2;
             centerY = (POINTS[target][1] + centerY)/2;
 
             requestAnimationFrame(draw);
         }
 
-        window.onload = function() {
+        function init() {
             colorRect(0,0, canvas.width,canvas.height, 'black'); 
             draw();
+        }
+
+        window.onload = function() {
+            init();
         }
 
     </script>
