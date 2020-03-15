@@ -5,14 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Game Dev by rachitiitr</title>
+    <style>
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;   
+        }
+        #amazeme {
+            border: 1px solid #CCC; 
+            display: inline-block; 
+            background:#DDD;
+            cursor: pointer; 
+        }
+    </style>
 </head>
 <body >
-    <div>
+    <div id="container">
         <canvas id="mycanvas" width="800" height="600" style="display:block;margin:0 auto"></canvas>
         <br/>
         Enter # of sides: <input id="nthsidedpolygon" type="number" placeholder="sides must be greater than 3" style="width:200px"/>
         <br/>
-        <div style="border: 1px solid #CCC; display: inline-block; background:#DDD;" onclick="playForSide()">Amaze me!</div>
+        <div id="amazeme" onclick="playForSide()">Amaze me!</div>
     </div>
     <script>
         let canvas = document.querySelector('#mycanvas');
@@ -27,6 +40,8 @@
         
         function playForSide() {
             N = document.querySelector('#nthsidedpolygon').value;
+            if (N < 3) alert('must be greater than 3');
+            return;
             init();
         }
 
