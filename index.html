@@ -40,8 +40,11 @@
         
         function playForSide() {
             N = document.querySelector('#nthsidedpolygon').value;
-            if (N < 3) alert('must be greater than 3');
-            return;
+            if (N < 3) {
+                alert('must be greater than 3');
+                return;
+            }
+            
             init();
         }
 
