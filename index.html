@@ -4,31 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Game Dev by rachitiitr</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <title>Chaos Game by rachitiitr</title>
     <style>
         #container {
             display: flex;
             flex-direction: column;
-            align-items: center;   
+            align-items: center;
+            justify-content: center;  
         }
-        #amazeme {
-            border: 1px solid #CCC; 
-            display: inline-block; 
-            background:#DDD;
-            cursor: pointer; 
-        }
-        #nthsidedpolygon {
-            font-size: 1em;
+        #container * {
+            margin: 10px;
         }
     </style>
 </head>
 <body >
-    <div id="container">
+    <div class="ui placeholder segment">
         <canvas id="mycanvas" width="800" height="600" style="display:block;margin:0 auto"></canvas>
-        <br/>
-        Enter # of sides: <input id="nthsidedpolygon" type="number" placeholder="sides must be greater than 3" style="width:200px"/>
-        <br/>
-        <div id="amazeme" onclick="playForSide()">Amaze me!</div>
+    </div>
+    <div id="container">
+        <div class="ui styled accordion">
+            <div class="active title">
+                <i class="dropdown icon"></i>
+                How this works?
+            </div>
+            <div class="active content">
+                <ul class="list">
+                    <li>We start with a random point.</li>
+                    <li>In each step, we chose randomly one of the bigger vertex and move half-way to it from our current position.</li>
+                    <li>We keep repeating the previous step till infinity.</li>
+                </ul>
+            </div>
+            <div class="title">
+                <i class="dropdown icon"></i>
+                Who made it?
+            </div>
+            <div class="content">
+                <p>Made with <i class="heart icon"></i> by Rachit Jain <a href="https://rachitiitr.github.io/chaos-in-javascript/">@rachitiitr</a></p>
+            </div>
+        </div>
+        <div>
+            Enter number of bigger vertices: 
+            <div class="ui input focus">
+                <input id="nthsidedpolygon" type="number" placeholder="must be greater than 3" style="width:200px"/>
+            </div>
+            <br/>
+        </div>
+        <button class="ui secondary button" onclick="playForSide()">
+            Amaze me!
+        </button>
     </div>
     <script>
         let canvas = document.querySelector('#mycanvas');
