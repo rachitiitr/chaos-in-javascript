@@ -58,7 +58,7 @@
             let theta = (Math.PI*2)/N; 
 
             for (let i=0; i<N; i++) {
-                let currentTheta = i*theta;
+                let currentTheta = i*theta + (Math.PI/2); //rotating by 90 degs for better aesthetics
                 POINTS[i] = [origin[0] + rad*Math.cos(currentTheta), origin[1]+rad*Math.sin(currentTheta)];
                 colorCircle(POINTS[i][0],POINTS[i][1], RAD*10, 'cyan');
             }
