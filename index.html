@@ -52,6 +52,11 @@
                 <input id="nthsidedpolygon" type="number" placeholder="must be greater than 3" style="width:200px"/>
             </div>
             <br/>
+            Enter %age of distance to travel: 
+            <div class="ui input focus">
+                <input id="distratio" type="number" placeholder="50" style="width:200px"/>
+            </div>
+            <br/>
         </div>
         <button class="ui primary button" onclick="playForSide()">
             Amaze me!
@@ -67,7 +72,7 @@
             <div class="active content">
                 <ul class="list">
                     <li>We start with a random point.</li>
-                    <li>In each step, we chose randomly one of the bigger vertex and move half-way to it from our current position.</li>
+                    <li>In each step, we chose randomly one of the bigger vertex and move 50% (or what ever %age you specified) towards it from our current position.</li>
                     <li>We keep repeating the previous step till infinity.</li>
                 </ul>
             </div>
@@ -107,12 +112,23 @@
         let POINTS = [];
         let N = 3;
         let PADDING = 50;
+        let distRatio = 0.5;
         
         function playForSide() {
             N = document.querySelector('#nthsidedpolygon').value;
             if (N < 3) {
-                alert('must be greater than 3');
+                alert('vertices must be greater than 3');
                 return;
+            }
+
+            distRatio = document.querySelector('#distratio').value/100;
+            if (distRatio > 0 && distRatio < 1) {
+                // all good here 
+            }
+            else {
+                alert('distance to travel must be less than 100%, try 61.8');
+                document.querySelector('#distratio').value = 61.8;
+                distRatio = 61.8;
             }
             
             init();
@@ -154,8 +170,8 @@
             colorCircle(centerX, centerY, RAD, 'cyan');
 
             let target = Math.floor(Math.random() * N);
-            centerX = (POINTS[target][0] + centerX)/2;
-            centerY = (POINTS[target][1] + centerY)/2;
+            centerX = (distRatio * POINTS[target][0]) + (1-distRatio) * centerX;
+            centerY = (distRatio * POINTS[target][1]) + (1-distRatio) * centerY;
 
             requestAnimationFrame(draw);
         }
