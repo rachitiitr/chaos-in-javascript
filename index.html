@@ -193,9 +193,9 @@
             centerX = (distRatio * POINTS[target][0]) + (1-distRatio) * centerX;
             centerY = (distRatio * POINTS[target][1]) + (1-distRatio) * centerY;
 
-            requestAnimationFrame(draw);
+            const myTimer = setTimeout(draw, 1000/300);
         }
-
+        
         function init() {
             colorRect(0,0, canvas.width,canvas.height, 'black'); 
             draw();
