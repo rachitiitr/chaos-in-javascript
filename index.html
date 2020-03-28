@@ -180,16 +180,17 @@
             let origin = [W/2, h/2+PADDING/2];
             let rad = h/2;
             let theta = (Math.PI*2)/N; 
+            let target = Math.floor(Math.random() * N);
 
             for (let i=0; i<N; i++) {
                 let currentTheta = i*theta - (Math.PI/2); //rotating by 90 degs for better aesthetics
                 POINTS[i] = [origin[0] + rad*Math.cos(currentTheta), origin[1]+rad*Math.sin(currentTheta)];
-                colorCircle(POINTS[i][0],POINTS[i][1], RAD*10, 'cyan');
+                colorCircle(POINTS[i][0],POINTS[i][1], RAD*10, i == target?'red':'cyan');
             }
             
             colorCircle(centerX, centerY, RAD, 'cyan');
 
-            let target = Math.floor(Math.random() * N);
+            
             centerX = (distRatio * POINTS[target][0]) + (1-distRatio) * centerX;
             centerY = (distRatio * POINTS[target][1]) + (1-distRatio) * centerY;
 
@@ -205,6 +206,15 @@
             init();
         }
 
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142508299-2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-142508299-2');
     </script>
 </body>
 </html>
