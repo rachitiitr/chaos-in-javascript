@@ -54,6 +54,12 @@ Its value approximately equal to 1.618 but it is infact, an *irrational number*.
 Till then try listening to this!***
 https://www.youtube.com/watch?v=wJ5XVOLncds
 
+## Demo
+https://rachitiitr.github.io/chaos-in-javascript/
+
+## Tutorial
+https://www.youtube.com/watch?v=oeM_PexPRAg
+
 ## More  to read and References
 * https://web.cs.wpi.edu/~matt/courses/cs563/talks/cbyrd/pres1.html
 * https://sk33lz.com/create/fractals/history-fractals
